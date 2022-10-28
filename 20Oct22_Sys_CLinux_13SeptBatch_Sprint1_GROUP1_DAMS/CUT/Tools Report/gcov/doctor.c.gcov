@@ -1,0 +1,148 @@
+        -:    0:Source:doctor.c
+        -:    0:Graph:a-doctor.gcno
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    1:#include <common.h>
+        -:    2:#include <doctor.h>
+        -:    3:
+        -:    4:extern docnode *dochead;
+        -:    5:
+    #####:    6:void addDoc(docnode *docpointer){
+    #####:    7:    printf("*******************************************  Doctor's Detail Addition Portal  ************************************************\n\n\n");
+    #####:    8:    int srl=1;
+        -:    9:    char key;
+        -:   10:    
+    #####:   11:    if(docpointer==NULL){
+    #####:   12:        dochead=(docnode*)malloc(sizeof(docnode));
+    #####:   13:        docpointer=dochead;
+    #####:   14:        docpointer->next=NULL;  
+    #####:   15:        printf("Enter Doctor's name: ");
+    #####:   16:        getchar();
+    #####:   17:        gets(docpointer->name);
+    #####:   18:        printf("Enter Doctor's Designation : ");
+    #####:   19:        getchar();
+    #####:   20:        gets(docpointer->designation);
+    #####:   21:        phone_tag1:
+    #####:   22:        printf("Enter Doctor's Mobile Number: ");
+    #####:   23:        gets(docpointer->phone);
+        -:   24:          
+        -:   25:     }
+        -:   26:     else{
+    #####:   27:        while(docpointer->next!=NULL)
+        -:   28:        {
+    #####:   29:            docpointer=docpointer->next;
+        -:   30:        }
+    #####:   31:        docpointer->next=(docnode*)malloc(sizeof(docnode));
+    #####:   32:	docpointer=docpointer->next;
+    #####:   33:	docpointer->next=NULL;
+    #####:   34:	printf("Enter Doctor's name: ");
+    #####:   35:        getchar();
+    #####:   36:        gets(docpointer->name);
+    #####:   37:        printf("Enter Doctor's Designation : ");
+    #####:   38:        getchar();
+    #####:   39:        gets(docpointer->designation);
+    #####:   40:        phone_tag:
+    #####:   41:        printf("Enter Doctor's Mobile Number: ");
+    #####:   42:        gets(docpointer->phone);
+        -:   43:       
+        -:   44:      }
+        -:   45:    
+    #####:   46:        int len=strlen(docpointer->phone);
+    #####:   47:        if(len!=10)
+        -:   48:        {
+    #####:   49:            printf("Invalid Mobile Number. Try again\n");
+    #####:   50:            goto phone_tag1;
+        -:   51:        }
+        -:   52:        int i;
+    #####:   53:        for(i=0;docpointer->phone[i]!='\0';i++)
+        -:   54:        {
+    #####:   55:            if(docpointer->phone[i]<'0' || docpointer->phone[i]>'9')
+        -:   56:            {
+    #####:   57:                 printf("Invalid Mobile Number. Try again\n");
+    #####:   58:                 goto phone_tag1;
+        -:   59:            }
+        -:   60:        }
+    #####:   61:        docpointer->serial=srl;
+    #####:   62:        srl++;
+    #####:   63:        printf("\n\nDoctor's detail added Successfully\n\n");
+    #####:   64:        printf("Press any key to continue...");
+    #####:   65:        scanf("%c",&key);
+    #####:   66:        if(key>=0){
+    #####:   67:          return;
+        -:   68:        }
+        -:   69:}
+        -:   70:
+        -:   71:
+        -:   72:
+    #####:   73:void updateDoc(docnode *docpointer){
+        -:   74:    int updt;
+        -:   75:    char key;
+    #####:   76:    printf("*************************************************  Doctor's detail Updation Portal  ******************************************************\n\n\n");
+    #####:   77:    printf("Enter Doctor's serial no: ");
+    #####:   78:    scanf(" %d",&updt); 
+    #####:   79:    if(docpointer==NULL){
+    #####:   80:       printf("\n\nNo Record Found!!!\n\n\n");
+    #####:   81:       return;
+        -:   82:    }
+        -:   83:    else{
+    #####:   84:       while(docpointer->serial != updt){
+    #####:   85:          docpointer=docpointer->next;
+        -:   86:       }
+    #####:   87:        printf("Update Doctor's name: ");
+    #####:   88:        getchar();
+    #####:   89:        gets(docpointer->name);
+    #####:   90:        printf("Update Doctor's Designation : ");
+    #####:   91:        getchar();
+    #####:   92:        gets(docpointer->designation);
+    #####:   93:        phone_tag1:
+    #####:   94:        printf("Update Doctor's Mobile Number: ");
+    #####:   95:        gets(docpointer->phone);
+    #####:   96:        printf("\n\nDoctor's detail Updation Successful!!!\n\n");
+        -:   97:     
+    #####:   98:        int len=strlen(docpointer->phone);
+    #####:   99:        if(len!=10)
+        -:  100:        {
+    #####:  101:            printf("Invalid Mobile Number. Try again\n");
+    #####:  102:            goto phone_tag1;
+        -:  103:        }
+        -:  104:        int i;
+    #####:  105:        for(i=0;docpointer->phone[i]!='\0';i++)
+        -:  106:        {
+    #####:  107:            if(docpointer->phone[i]<'0' || docpointer->phone[i]>'9')
+        -:  108:            {
+    #####:  109:                 printf("Invalid Mobile Number. Try again\n");
+    #####:  110:                 goto phone_tag1;
+        -:  111:            }
+        -:  112:        }
+    #####:  113:        printf("Press any key to continue...");
+    #####:  114:        scanf("%c",&key);
+    #####:  115:        if(key>=0){
+    #####:  116:           return;
+        -:  117:        }
+        -:  118:     }
+        -:  119:}
+        -:  120:
+        -:  121:
+        -:  122:
+    #####:  123:void viewDoc(docnode *docpointer){
+    #####:  124:    printf("*************************************************  Doctor's list Portal ******************************************************\n\n\n");
+    #####:  125:    if(docpointer==NULL)
+        -:  126:    {
+    #####:  127:        printf("No Record Found!!!\n\n\n");
+    #####:  128:        return;
+        -:  129:    }
+    #####:  130:    while(docpointer!=NULL)
+        -:  131:    {
+    #####:  132:        printf("%d: ",docpointer->serial);
+    #####:  133:        printf("%s (Ph: %s ), Designation: %s\n\n",docpointer->name,docpointer->phone,docpointer->designation);
+    #####:  134:        docpointer=docpointer->next;
+        -:  135:    }
+    #####:  136:    printf("\n\n\n\Press any key to go back : ");
+        -:  137:    char key;
+    #####:  138:    getchar();
+    #####:  139:    scanf("%c",&key);
+    #####:  140:    if(key>=0)
+        -:  141:    {   
+    #####:  142:        return;
+        -:  143:    }
+        -:  144:}

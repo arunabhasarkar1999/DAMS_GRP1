@@ -1,0 +1,3 @@
+ 1 ,amisha ,1200012000 cold
+ 2 ,aparna ,1300013000 fever
+ 3 ,arun ,1400014000 cough

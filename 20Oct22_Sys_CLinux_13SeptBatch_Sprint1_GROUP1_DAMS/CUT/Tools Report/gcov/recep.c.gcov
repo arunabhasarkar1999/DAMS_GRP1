@@ -1,0 +1,161 @@
+        -:    0:Source:recep.c
+        -:    0:Graph:a-recep.gcno
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    1:#include <common.h>
+        -:    2:#include <recep.h>
+        -:    3:
+        -:    4:extern recepnode *recephead;
+        -:    5:
+    #####:    6:void addRecep(recepnode *receppointer){
+    #####:    7:    printf("*******************************************  Receptionist's Detail Addition Portal  ************************************************\n\n\n");
+    #####:    8:    int srl=1;
+        -:    9:    char key;
+        -:   10:    
+    #####:   11:    if(receppointer==NULL){
+    #####:   12:        recephead=(recepnode*)malloc(sizeof(recepnode));
+    #####:   13:        receppointer=recephead;
+    #####:   14:        receppointer->next=NULL;  
+    #####:   15:        printf("Enter Receptionist's name: ");
+    #####:   16:        getchar();
+    #####:   17:        gets(receppointer->name);
+    #####:   18:        phone_tag1:
+    #####:   19:        printf("Enter Receptionist's Mobile Number: ");
+    #####:   20:        gets(receppointer->phone);
+        -:   21:          
+        -:   22:     }
+        -:   23:     else{
+    #####:   24:        while(receppointer->next!=NULL)
+        -:   25:        {
+    #####:   26:            receppointer=receppointer->next;
+        -:   27:        }
+    #####:   28:        receppointer->next=(recepnode*)malloc(sizeof(recepnode));
+    #####:   29:	receppointer=receppointer->next;
+    #####:   30:	receppointer->next=NULL;
+    #####:   31:	printf("Enter Receptionist's name: ");
+    #####:   32:        getchar();
+    #####:   33:        gets(receppointer->name);
+    #####:   34:        phone_tag:
+    #####:   35:        printf("Enter Receptionist's Mobile Number: ");
+    #####:   36:        gets(receppointer->phone);
+        -:   37:       
+        -:   38:      }
+        -:   39:    
+    #####:   40:        int len=strlen(receppointer->phone);
+    #####:   41:        if(len!=10)
+        -:   42:        {
+    #####:   43:            printf("Invalid Mobile Number. Try again\n");
+    #####:   44:            goto phone_tag1;
+        -:   45:        }
+        -:   46:        int i;
+    #####:   47:        for(i=0;receppointer->phone[i]!='\0';i++)
+        -:   48:        {
+    #####:   49:            if(receppointer->phone[i]<'0' || receppointer->phone[i]>'9')
+        -:   50:            {
+    #####:   51:                 printf("Invalid Mobile Number. Try again\n");
+    #####:   52:                 goto phone_tag1;
+        -:   53:            }
+        -:   54:        }
+    #####:   55:        receppointer->serial=srl;
+    #####:   56:        srl++;
+    #####:   57:        printf("\n\nReceptionist's detail added Successfully\n\n");
+    #####:   58:        printf("Press any key to continue...");
+    #####:   59:        scanf("%c",&key);
+    #####:   60:        if(key>=0){
+    #####:   61:          return;
+        -:   62:        }
+        -:   63:}
+        -:   64:
+        -:   65:
+        -:   66:
+    #####:   67:void updateRecep(recepnode *receppointer){
+        -:   68:    int updt;
+        -:   69:    char key;
+    #####:   70:    printf("*************************************************  Receptionist's detail Updation Portal  ******************************************************\n\n\n");
+    #####:   71:    printf("Enter Receptionist's serial no: ");
+    #####:   72:    scanf(" %d",&updt); 
+    #####:   73:    if(receppointer==NULL){
+    #####:   74:       printf("\n\nNo Record Found!!!\n\n\n");
+    #####:   75:       return;
+        -:   76:    }
+        -:   77:    else{
+    #####:   78:       while(receppointer->serial != updt){
+    #####:   79:          receppointer=receppointer->next;
+        -:   80:       }
+    #####:   81:        printf("Update Receptionist's name: ");
+    #####:   82:        getchar();
+    #####:   83:        gets(receppointer->name);
+    #####:   84:        phone_tag1:
+    #####:   85:        printf("Update Receptionist's Mobile Number: ");
+    #####:   86:        gets(receppointer->phone);
+    #####:   87:        printf("\n\nReceptionist's detail Updation Successful!!!\n\n");
+        -:   88:     
+    #####:   89:        int len=strlen(receppointer->phone);
+    #####:   90:        if(len!=10)
+        -:   91:        {
+    #####:   92:            printf("Invalid Mobile Number. Try again\n");
+    #####:   93:            goto phone_tag1;
+        -:   94:        }
+        -:   95:        int i;
+    #####:   96:        for(i=0;receppointer->phone[i]!='\0';i++)
+        -:   97:        {
+    #####:   98:            if(receppointer->phone[i]<'0' || receppointer->phone[i]>'9')
+        -:   99:            {
+    #####:  100:                 printf("Invalid Mobile Number. Try again\n");
+    #####:  101:                 goto phone_tag1;
+        -:  102:            }
+        -:  103:        }
+    #####:  104:        printf("Press any key to continue...");
+    #####:  105:        scanf("%c",&key);
+    #####:  106:        if(key>=0){
+    #####:  107:           return;
+        -:  108:        }
+        -:  109:     }
+        -:  110:}
+        -:  111:
+        -:  112:
+        -:  113:
+    #####:  114:void viewRecep(recepnode *receppointer){
+    #####:  115:    printf("*************************************************  Receptionist's list Portal ******************************************************\n\n\n");
+    #####:  116:    if(receppointer==NULL)
+        -:  117:    {
+    #####:  118:        printf("No Record Found!!!\n\n\n");
+    #####:  119:        return;
+        -:  120:    }
+    #####:  121:    while(receppointer!=NULL)
+        -:  122:    {
+    #####:  123:        printf("%d: ",receppointer->serial);
+    #####:  124:        printf("%s (Ph: %s )\n\n",receppointer->name,receppointer->phone);
+    #####:  125:        receppointer=receppointer->next;
+        -:  126:    }
+    #####:  127:    printf("\n\n\nPress any key to go back : ");
+        -:  128:    char key;
+    #####:  129:    getchar();
+    #####:  130:    scanf("%c",&key);
+    #####:  131:    if(key>=0)
+        -:  132:    {   
+    #####:  133:        return;
+        -:  134:    }
+        -:  135:}
+        -:  136:
+        -:  137:
+        -:  138:
+    #####:  139:void Rwrite(recepnode *receppointer){
+    #####:  140:    FILE *rptr = fopen("receptionist.txt","wb");
+        -:  141:    
+    #####:  142:    while(receppointer != NULL){
+    #####:  143:        fwrite(receppointer,sizeof(recepnode),1,rptr);
+    #####:  144:        receppointer=receppointer->next;
+        -:  145:    }
+    #####:  146:    fclose(rptr);
+    #####:  147:    printf("\n\nData written to the receptionist file Successfully!!!\n\n");
+    #####:  148:    printf("\n\nPress any key to go back : ");
+        -:  149:    char key;
+    #####:  150:    getchar();
+    #####:  151:    scanf("%c",&key);
+    #####:  152:    if(key>=0)
+        -:  153:    {   
+    #####:  154:        return;
+        -:  155:    }
+        -:  156:}
+        -:  157:    

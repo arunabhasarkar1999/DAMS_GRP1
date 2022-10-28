@@ -1,0 +1,233 @@
+        -:    0:Source:main.c
+        -:    0:Graph:a-main.gcno
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    1:#include <common.h>
+        -:    2:#include <patient.h>
+        -:    3:#include <doctor.h>
+        -:    4:#include <recep.h>
+        -:    5:
+        -:    6:node *head=NULL;
+        -:    7:docnode *dochead=NULL;
+        -:    8:recepnode *recephead=NULL;
+    #####:    9:int main()
+        -:   10:{
+        -:   11:        char query,query2,query3,query4,query5,query6;
+        -:   12:        while(1)
+        -:   13:    {    
+    #####:   14:        system("clear");
+    #####:   15:        printf("===========================================  WELCOME TO DAMS  =========================================== \n\n\n\n"); 
+    #####:   16:        printf("***********************************************  Main Menu *********************************************** \n\n\n");
+    #####:   17:        main_again:
+    #####:   18:            printf("1.I'm a Receptionist\n2.I'm a Doctor\n3.I'm the Admin\n4.Exit\n\nchoice: ");
+    #####:   19:            scanf(" %c",&query);
+    #####:   20:            if(query=='1')
+        -:   21:            {
+        -:   22:                while(1)
+    #####:   23:                {
+    #####:   24:                    system("clear");
+    #####:   25:                    printf("***********************************************  Patient's Menu  ***********************************************\n\n\n");
+    #####:   26:                    printf("1.Place Appointment\n2.View particular Appointment\n3.View all Appointment\n4.Delete Appointment\n5.Update Appointment\n6.Back to main menu\n\nchoice: ");
+        -:   27:                    char appoint1;
+    #####:   28:                        scanf(" %c",&appoint1);
+    #####:   29:                        if(appoint1=='1')
+        -:   30:                        {
+    #####:   31:                            system("clear");
+    #####:   32:                            Appoint(head);
+        -:   33:                        }
+    #####:   34:                        else if(appoint1=='2')
+        -:   35:                        {
+    #####:   36:                            system("clear");
+    #####:   37:                            View(head);
+        -:   38:                        }
+    #####:   39:                        else if(appoint1=='3')
+        -:   40:                        {
+    #####:   41:                            system("clear");
+    #####:   42:                            Showlist(head);
+        -:   43:                        }
+    #####:   44:                        else if(appoint1=='4')
+        -:   45:                        {
+    #####:   46:                            system("clear");
+    #####:   47:                            Delete(head);
+        -:   48:                        }
+    #####:   49:                        else if(appoint1=='5')
+        -:   50:                        {
+    #####:   51:                            system("clear");
+    #####:   52:                            Update(head);
+        -:   53:                        }
+    #####:   54:                        else if(appoint1=='6')
+        -:   55:                        {
+    #####:   56:                            system("clear");
+    #####:   57:                            break;
+        -:   58:                        }
+        -:   59:                        else
+        -:   60:                        {
+    #####:   61:                            printf("Wrong Command!!!\n\n");
+    #####:   62:                            break;
+        -:   63:                        }
+        -:   64:                }
+        -:   65:            }
+    #####:   66:            else if(query=='2')
+        -:   67:            {
+        -:   68:                while(1)
+        -:   69:                {
+    #####:   70:                    system("clear");
+    #####:   71:                    printf("***********************************************  Doctor's Menu  ***********************************************\n\n\n");
+    #####:   72:                    printf("1.Show list\n2.Call next\n3.Back to main menu.\n\nchoice: ");
+    #####:   73:                    scanf(" %c",&query2);
+    #####:   74:                    if(query2=='1')
+        -:   75:                    {
+    #####:   76:                        system("clear");
+    #####:   77:                        Showlist(head);
+        -:   78:                    }
+    #####:   79:                    else if(query2=='2')
+        -:   80:                    {
+    #####:   81:                        system("clear");
+    #####:   82:                        Call(head);
+        -:   83:                    }
+    #####:   84:                    else if(query2=='3')
+        -:   85:                    {
+    #####:   86:                        system("clear");
+    #####:   87:                        break;
+        -:   88:                    }
+        -:   89:                    else
+        -:   90:                    {
+    #####:   91:                        printf("Wrong Command!!!\n\n");
+    #####:   92:                        break;
+        -:   93:                    }
+        -:   94:                }
+        -:   95:            }
+    #####:   96:            else if(query=='3'){
+        -:   97:                while(1)
+        -:   98:                {
+    #####:   99:                   system("clear");
+    #####:  100:                  admin_again:
+    #####:  101:                   printf("***********************************************  Admin's Menu  ***********************************************\n\n\n");
+    #####:  102:                    printf("1.Doctor's Section\n2.Receptionist's Section\n3.Patient's Section\n4.Back to Main menu.\n\nchoice: ");
+        -:  103:                
+    #####:  104:                    scanf(" %c",&query3);
+    #####:  105:            	    if(query3=='1')
+        -:  106:                    {
+    #####:  107:                        system("clear");
+    #####:  108:                        printf("***********************************************  Doctor's Section  ***********************************************\n\n\n");
+    #####:  109:                        printf("1.Add Doctor\n2.Update Doctor's Information\n3.View Doctor's Detail\n4.Back to admin's menu.\n\nchoice: ");
+    #####:  110:                        scanf(" %c",&query4);
+    #####:  111:                        if(query4=='1'){
+    #####:  112:                            system("clear");
+    #####:  113:                            addDoc(dochead);
+        -:  114:                        }
+    #####:  115:                        else if(query4=='2')
+        -:  116:                        {
+    #####:  117:                            system("clear");
+    #####:  118:                            updateDoc(dochead);
+        -:  119:                        }
+    #####:  120:                        else if(query4=='3')
+        -:  121:                        {
+    #####:  122:                            system("clear");
+    #####:  123:                            viewDoc(dochead);
+        -:  124:                        }
+    #####:  125:                        else if(query4=='4')
+        -:  126:                        {
+    #####:  127:                            system("clear");
+    #####:  128:                            goto admin_again;
+        -:  129:                        }
+        -:  130:                        else
+        -:  131:                        {
+    #####:  132:                            printf("Wrong Command!!!\n\n");
+    #####:  133:                            goto admin_again;
+        -:  134:                        }
+        -:  135:                        
+        -:  136:                    }
+    #####:  137:                    else if(query3=='2')
+        -:  138:                    {
+    #####:  139:                        system("clear");
+    #####:  140:                        printf("***********************************************  Receptionist's Section  ***********************************************\n\n\n");
+    #####:  141:                        printf("1.Add Receptionist\n2.Update Receptionist's Information\n3.View Receptionist's Detail\n4.Write data into file\n5.Back to admin's menu.\n\nchoice: ");
+    #####:  142:                        scanf(" %c",&query5);
+    #####:  143:                        if(query5=='1'){
+    #####:  144:                            system("clear");
+    #####:  145:                            addRecep(recephead);
+        -:  146:                        }
+    #####:  147:                        else if(query5=='2')
+        -:  148:                        {
+    #####:  149:                            system("clear");
+    #####:  150:                            updateRecep(recephead);
+        -:  151:                        }
+    #####:  152:                        else if(query5=='3')
+        -:  153:                        {
+    #####:  154:                            system("clear");
+    #####:  155:                            viewRecep(recephead);
+        -:  156:                        }
+    #####:  157:                        else if(query5=='4')
+        -:  158:                        {
+    #####:  159:                            system("clear");
+    #####:  160:                            Rwrite(recephead);
+        -:  161:                        }
+    #####:  162:                        else if(query5=='5')
+        -:  163:                        {
+    #####:  164:                            system("clear");
+    #####:  165:                            goto admin_again;
+        -:  166:                        }
+        -:  167:                        else
+        -:  168:                        {
+    #####:  169:                            printf("Wrong Command!!!\n\n");
+    #####:  170:                            goto admin_again;
+        -:  171:                        }
+        -:  172:                        
+        -:  173:                    }
+    #####:  174:                    else if(query3=='3')
+        -:  175:                    {
+    #####:  176:                        system("clear");
+    #####:  177:                        printf("***********************************************  Patient Section  ***********************************************\n\n\n");
+    #####:  178:                        printf("1.Add Patient\n2.Update Patient's Information\n3.View Patient's Detail\n4.Back to admin's menu.\n\nchoice: ");
+    #####:  179:                        scanf(" %c",&query6);
+    #####:  180:                        if(query6=='1'){
+    #####:  181:                            system("clear");
+    #####:  182:                            Appoint(head);
+        -:  183:                        }
+    #####:  184:                        else if(query6=='2')
+        -:  185:                        {
+    #####:  186:                            system("clear");
+    #####:  187:                            Update(head);
+        -:  188:                        }
+    #####:  189:                        else if(query6=='3')
+        -:  190:                        {
+    #####:  191:                            system("clear");
+    #####:  192:                            Showlist(head);
+        -:  193:                        }
+    #####:  194:                        else if(query6=='4')
+        -:  195:                        {
+    #####:  196:                            system("clear");
+    #####:  197:                            goto admin_again;
+        -:  198:                        }
+        -:  199:                        else
+        -:  200:                        {
+    #####:  201:                            printf("Wrong Command!!!\n\n");
+    #####:  202:                            goto admin_again;
+        -:  203:                        }
+        -:  204:                    }
+    #####:  205:                    else if(query3=='4')
+        -:  206:                    {
+    #####:  207:                        system("clear");
+    #####:  208:                        break;
+        -:  209:                    }
+        -:  210:                    else
+        -:  211:                    {
+    #####:  212:                        printf("Wrong Command!!!\n\n");
+    #####:  213:                        goto admin_again;
+        -:  214:                    }
+        -:  215:                 }
+        -:  216:            }
+    #####:  217:            else if(query=='4'){
+    #####:  218:                system("clear");
+    #####:  219:                printf("\n\nThanks for Visiting :D !!\n\n\n");
+    #####:  220:                exit(0);
+        -:  221:            }
+        -:  222:            else
+        -:  223:            {
+    #####:  224:                printf("Wrong Command!!!\n\nChoose correct option\n\n");
+    #####:  225:                goto main_again;
+        -:  226:            }
+        -:  227:    }
+        -:  228:    return 0;
+        -:  229:}

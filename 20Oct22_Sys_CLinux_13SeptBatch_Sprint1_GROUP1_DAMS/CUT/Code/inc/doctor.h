@@ -13,7 +13,7 @@ typedef struct docnode
 void addDoc(docnode *);
 void updateDoc(docnode *);
 void viewDoc(docnode *);
-
+void Dwrite(docnode *);
 
 
 #endif

@@ -13,7 +13,7 @@ typedef struct recepnode
 void addRecep(recepnode *);
 void updateRecep(recepnode *);
 void viewRecep(recepnode *);
-
+void Rwrite(recepnode *);
 
 
 #endif

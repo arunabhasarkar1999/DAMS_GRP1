@@ -3,10 +3,9 @@
 
 extern node *head;
 int appointment=20;
-
 void Appoint(node*pointer)
 {
-    printf("*******************************************  Appointment Portal  ************************************************\n\n\n");
+    printf("***********************************************  Appointment Portal  ***********************************************\n\n\n");
     int serial;
     char key;
   if(appointment==0){
@@ -83,7 +82,7 @@ void Delete(node *pointer){
     int del;
     char key; 
     node *temp;
-    printf("**********************************************  Appointment Deletion Portal  ************************************************\n\n\n");
+    printf("***********************************************  Appointment Deletion Portal  ***********************************************\n\n\n");
     printf("Enter serial No : ");
     scanf(" %d",&del);
     if(pointer==NULL){
@@ -93,30 +92,32 @@ void Delete(node *pointer){
        temp=pointer;
        pointer=NULL;
        free(temp);
-       printf("Appointment Deletion Successful!!!\n\n");
+       printf("\nAppointment Deletion Successful!!!\n\n");
     }  
     else{
-       node *temp1=pointer;
+       node *temp2, *temp1=pointer;
        while(temp1->next->serial != del){
           temp1=temp1->next;
        }
+       temp2=temp1->next->next;
        temp=temp1->next;
-       temp1->next=temp1->next->next;
+       temp1->next=temp2;
        free(temp);
-       printf("Appointment Deletion Successful!!!\n\n");
+       printf("\nAppointment Deletion Successful!!!\n\n");
     }
    
         printf("Press any key to continue...");
         scanf("%c",&key);
-        if(key>=0)
+        if(key>=0){
            return;
+        }
 } 
 
 
 void Update(node *pointer){
     int updt;
     char key;
-    printf("*************************************************  Appointment Updation portal  ******************************************************\n\n\n");
+    printf("***********************************************  Appointment Updation portal  ***********************************************\n\n\n");
     printf("Enter Patient's serial no: ");
     scanf(" %d",&updt); 
     if(pointer==NULL){
@@ -132,7 +133,7 @@ void Update(node *pointer){
         phone_tag1:
         printf("Update Patient's Mobile Number: ");
         gets(pointer->phone);
-        printf("Appointment Updation Successful!!!\n\n");
+        printf("\n\nAppointment Updation Successful!!!\n\n");
     }  
     else{
        while(pointer->next->serial != updt){
@@ -147,7 +148,7 @@ void Update(node *pointer){
        phone_tag:
        printf("Update patient's Mobile Number: ");
        gets(pointer->phone);
-       printf("Appointment Updation Successful!!!\n\n");
+       printf("\n\nAppointment Updation Successful!!!\n\n");
     }
     
         int len=strlen(pointer->phone);
@@ -165,7 +166,7 @@ void Update(node *pointer){
                  goto phone_tag1;
             }
         }
-        printf("Press any key to continue...");
+        printf("\nPress any key to continue...");
         scanf("%c",&key);
         if(key>=0)
            return;
@@ -175,7 +176,7 @@ void Update(node *pointer){
     
 void Showlist(node *pointer)
 {
-    printf("*************************************************  Today's Appointment list  ******************************************************\n\n\n");
+    printf("***********************************************  Today's Appointment list  ***********************************************\n\n\n");
     if(pointer==NULL)
     {
         printf("No Appointment today!!!\n\n\n");
@@ -187,7 +188,7 @@ void Showlist(node *pointer)
         printf("%s (Ph: %s ), Illness: %s\n\n",pointer->name,pointer->phone,pointer->illness);
         pointer=pointer->next;
     }
-    printf("\n\n\n\nPress any key to go back to Doctor's menu: ");
+    printf("\n\n\nPress any key to go back to Doctor's menu: ");
     char key;
     getchar();
     scanf("%c",&key);
@@ -201,6 +202,7 @@ void Showlist(node *pointer)
 
 void View(node *pointer)
 {   
+    printf("***********************************************  Appointment Portal  ***********************************************\n\n\n");
     int srl;
     printf("Enter your Serial no : ");
     scanf(" %d",&srl);
@@ -216,11 +218,9 @@ void View(node *pointer)
     if(pointer->serial == srl){
         printf("%d: ",pointer->serial);
         printf("%s (Ph: %s ), Illness: %s\n\n",pointer->name,pointer->phone,pointer->illness);
-        return;
     }
     else{
         printf("No Record Found!!!\n\n\n");
-        return;
     }
     printf("\n\n\n\nPress any key to go back to Doctor's menu: ");
     char key;
@@ -237,6 +237,7 @@ void View(node *pointer)
 
 void Call(node *head)
 {
+    printf("***********************************************  Calling Portal  ***********************************************\n\n\n");
     node *temp;
     temp=head;
     char key;
@@ -260,7 +261,7 @@ void Call(node *head)
         printf("Next is:\n");
         printf("Serial %d: %s\nPhone:%s\nIllness:%s\n\n",temp->serial,temp->name,temp->phone,temp->illness);
     }
-    printf("\nPress any key to go back to Doctor's Menu...");
+    printf("\n\nPress any key to go back to Doctor's Menu...");
     getchar();
     scanf("%c",&key);
         if(key>=0)
@@ -275,3 +276,19 @@ void Call(node *head)
 
 
 
+void Pwrite(node *pointer){
+    FILE *rptr = fopen("patient.txt","w");
+        for(pointer=head; pointer; pointer=pointer->next){
+           fprintf(rptr," %d ,%s ,%s %s\n",pointer->serial,pointer->name,pointer->phone,pointer->illness);
+        }
+    fclose(rptr);
+    printf("\n\nData written to the patient file Successfully!!!\n\n");
+    printf("\n\nPress any key to go back : ");
+    char key;
+    getchar();
+    scanf("%c",&key);
+    if(key>=0)
+    {   
+        return;
+    }
+}

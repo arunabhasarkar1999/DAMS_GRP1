@@ -142,3 +142,22 @@ void viewDoc(docnode *docpointer){
         return;
     }
 }
+
+
+
+void Dwrite(docnode *docpointer){
+    FILE *rptr = fopen("doctor.txt","w");
+        for(docpointer=dochead; docpointer; docpointer=docpointer->next){
+           fprintf(rptr," %d ,%s ,%s ,%s\n",docpointer->serial,docpointer->name,docpointer->phone,docpointer->designation);
+        }
+    fclose(rptr);
+    printf("\n\nData written to the doctor file Successfully!!!\n\n");
+    printf("\n\nPress any key to go back : ");
+    char key;
+    getchar();
+    scanf("%c",&key);
+    if(key>=0)
+    {   
+        return;
+    }
+}

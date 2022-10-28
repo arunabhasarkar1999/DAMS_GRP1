@@ -1,0 +1,282 @@
+        -:    0:Source:patient.c
+        -:    0:Graph:a-patient.gcno
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    1:#include <common.h>
+        -:    2:#include <patient.h>
+        -:    3:
+        -:    4:extern node *head;
+        -:    5:int appointment=20;
+    #####:    6:void Appoint(node*pointer)
+        -:    7:{
+    #####:    8:    printf("***********************************************  Appointment Portal  ***********************************************\n\n\n");
+        -:    9:    int serial;
+        -:   10:    char key;
+    #####:   11:  if(appointment==0){
+    #####:   12:        printf("Sorry! Today's Appointment Full. Try after 8 p.m. for tomorrows appointment\n\n\n");
+    #####:   13:        printf("Press any key to continue...");
+    #####:   14:        scanf("%c",&key);
+    #####:   15:        if(key>=0)
+    #####:   16:        return;
+        -:   17:  }
+        -:   18:  else{
+    #####:   19:    if(pointer==NULL){
+    #####:   20:        head=(node*)malloc(sizeof(node));
+    #####:   21:        pointer=head;
+    #####:   22:        pointer->next=NULL;
+    #####:   23:        printf("Enter Patient's name: ");
+    #####:   24:        getchar();
+    #####:   25:        gets(pointer->name);
+    #####:   26:        printf("Enter Patient's illness: ");
+    #####:   27:        getchar();
+    #####:   28:        gets(pointer->illness);
+    #####:   29:        phone_tag1:
+    #####:   30:        printf("Enter Patient's Mobile Number: ");
+    #####:   31:        gets(pointer->phone);
+        -:   32:     }
+        -:   33:     else{
+    #####:   34:        while(pointer->next!=NULL)
+        -:   35:        {
+    #####:   36:            pointer=pointer->next;
+        -:   37:        }
+        -:   38:
+    #####:   39:        pointer->next=(node*)malloc(sizeof(node));
+    #####:   40:        pointer=pointer->next;
+    #####:   41:        pointer->next=NULL;
+    #####:   42:        printf("Enter patient's name: ");
+    #####:   43:        getchar();
+    #####:   44:        gets(pointer->name);
+    #####:   45:        printf("Enter patient's illness: ");
+    #####:   46:        getchar();
+    #####:   47:        gets(pointer->illness);
+    #####:   48:        phone_tag:
+    #####:   49:        printf("Enter Patient's Mobile Number: ");
+    #####:   50:        gets(pointer->phone);
+        -:   51:    }
+        -:   52:    
+    #####:   53:        int len=strlen(pointer->phone);
+    #####:   54:        if(len!=10)
+        -:   55:        {
+    #####:   56:            printf("Invalid Mobile Number. Try again\n");
+    #####:   57:            goto phone_tag1;
+        -:   58:        }
+        -:   59:        int i;
+    #####:   60:        for(i=0;pointer->phone[i]!='\0';i++)
+        -:   61:        {
+    #####:   62:            if(pointer->phone[i]<'0' || pointer->phone[i]>'9')
+        -:   63:            {
+    #####:   64:                 printf("Invalid Mobile Number. Try again\n");
+    #####:   65:                 goto phone_tag1;
+        -:   66:            }
+        -:   67:        }
+    #####:   68:        appointment--;
+    #####:   69:        serial=20-appointment;
+    #####:   70:        pointer->serial=serial;
+    #####:   71:        printf("\n\nAppointment accepted.\n");
+    #####:   72:        printf("Your serial number is %d.\n\n\n",pointer->serial);
+    #####:   73:        printf("Press any key to continue...");
+    #####:   74:        scanf("%c",&key);
+    #####:   75:        if(key>=0)
+    #####:   76:        return;
+        -:   77:  }
+        -:   78:}
+        -:   79:
+        -:   80:
+    #####:   81:void Delete(node *pointer){
+        -:   82:    int del;
+        -:   83:    char key; 
+        -:   84:    node *temp;
+    #####:   85:    printf("***********************************************  Appointment Deletion Portal  ***********************************************\n\n\n");
+    #####:   86:    printf("Enter serial No : ");
+    #####:   87:    scanf(" %d",&del);
+    #####:   88:    if(pointer==NULL){
+    #####:   89:       printf("No Record Found!!!\n\n\n");
+        -:   90:    }
+    #####:   91:    else if(pointer->serial == del){
+    #####:   92:       temp=pointer;
+    #####:   93:       pointer=NULL;
+    #####:   94:       free(temp);
+    #####:   95:       printf("\nAppointment Deletion Successful!!!\n\n");
+        -:   96:    }  
+        -:   97:    else{
+    #####:   98:       node *temp2, *temp1=pointer;
+    #####:   99:       while(temp1->next->serial != del){
+    #####:  100:          temp1=temp1->next;
+        -:  101:       }
+    #####:  102:       temp2=temp1->next->next;
+    #####:  103:       temp=temp1->next;
+    #####:  104:       temp1->next=temp2;
+    #####:  105:       free(temp);
+    #####:  106:       printf("\nAppointment Deletion Successful!!!\n\n");
+        -:  107:    }
+        -:  108:   
+    #####:  109:        printf("Press any key to continue...");
+    #####:  110:        scanf("%c",&key);
+    #####:  111:        if(key>=0){
+    #####:  112:           return;
+        -:  113:        }
+        -:  114:} 
+        -:  115:
+        -:  116:
+    #####:  117:void Update(node *pointer){
+        -:  118:    int updt;
+        -:  119:    char key;
+    #####:  120:    printf("***********************************************  Appointment Updation portal  ***********************************************\n\n\n");
+    #####:  121:    printf("Enter Patient's serial no: ");
+    #####:  122:    scanf(" %d",&updt); 
+    #####:  123:    if(pointer==NULL){
+    #####:  124:       printf("No Record Found!!!\n\n\n");
+        -:  125:    }
+    #####:  126:    else if(pointer->serial == updt){
+    #####:  127:        printf("Update Patient's Name: ");
+    #####:  128:        getchar();
+    #####:  129:        gets(pointer->name);
+    #####:  130:        printf("Update patient's illness: ");
+    #####:  131:        getchar();
+    #####:  132:        gets(pointer->illness);
+    #####:  133:        phone_tag1:
+    #####:  134:        printf("Update Patient's Mobile Number: ");
+    #####:  135:        gets(pointer->phone);
+    #####:  136:        printf("\n\nAppointment Updation Successful!!!\n\n");
+        -:  137:    }  
+        -:  138:    else{
+    #####:  139:       while(pointer->next->serial != updt){
+    #####:  140:          pointer=pointer->next;
+        -:  141:       }
+    #####:  142:       printf("Update patient's name: ");
+    #####:  143:       getchar();
+    #####:  144:       gets(pointer->name);
+    #####:  145:       printf("Enter patient's illness: ");
+    #####:  146:       getchar();
+    #####:  147:       gets(pointer->illness);
+    #####:  148:       phone_tag:
+    #####:  149:       printf("Update patient's Mobile Number: ");
+    #####:  150:       gets(pointer->phone);
+    #####:  151:       printf("\n\nAppointment Updation Successful!!!\n\n");
+        -:  152:    }
+        -:  153:    
+    #####:  154:        int len=strlen(pointer->phone);
+    #####:  155:        if(len!=10)
+        -:  156:        {
+    #####:  157:            printf("Invalid Mobile Number. Try again\n");
+    #####:  158:            goto phone_tag1;
+        -:  159:        }
+        -:  160:        int i;
+    #####:  161:        for(i=0;pointer->phone[i]!='\0';i++)
+        -:  162:        {
+    #####:  163:            if(pointer->phone[i]<'0' || pointer->phone[i]>'9')
+        -:  164:            {
+    #####:  165:                 printf("Invalid Mobile Number. Try again\n");
+    #####:  166:                 goto phone_tag1;
+        -:  167:            }
+        -:  168:        }
+    #####:  169:        printf("\nPress any key to continue...");
+    #####:  170:        scanf("%c",&key);
+    #####:  171:        if(key>=0)
+    #####:  172:           return;
+        -:  173:}
+        -:  174:
+        -:  175:
+        -:  176:    
+    #####:  177:void Showlist(node *pointer)
+        -:  178:{
+    #####:  179:    printf("***********************************************  Today's Appointment list  ***********************************************\n\n\n");
+    #####:  180:    if(pointer==NULL)
+        -:  181:    {
+    #####:  182:        printf("No Appointment today!!!\n\n\n");
+    #####:  183:        return;
+        -:  184:    }
+    #####:  185:    while(pointer!=NULL)
+        -:  186:    {
+    #####:  187:        printf("%d: ",pointer->serial);
+    #####:  188:        printf("%s (Ph: %s ), Illness: %s\n\n",pointer->name,pointer->phone,pointer->illness);
+    #####:  189:        pointer=pointer->next;
+        -:  190:    }
+    #####:  191:    printf("\n\n\nPress any key to go back to Doctor's menu: ");
+        -:  192:    char key;
+    #####:  193:    getchar();
+    #####:  194:    scanf("%c",&key);
+    #####:  195:    if(key>=0)
+        -:  196:    {   
+    #####:  197:        system("clear");
+    #####:  198:        return;
+        -:  199:    }
+        -:  200:}
+        -:  201:
+        -:  202:
+    #####:  203:void View(node *pointer)
+        -:  204:{   
+    #####:  205:    printf("***********************************************  Appointment Portal  ***********************************************\n\n\n");
+        -:  206:    int srl;
+    #####:  207:    printf("Enter your Serial no : ");
+    #####:  208:    scanf(" %d",&srl);
+    #####:  209:    if(pointer==NULL)
+        -:  210:    {
+    #####:  211:        printf("No Appointment today!!!\n\n\n");
+    #####:  212:        return;
+        -:  213:    }
+    #####:  214:    while(pointer->serial != srl)
+        -:  215:    {
+    #####:  216:        pointer=pointer->next;
+        -:  217:    }
+    #####:  218:    if(pointer->serial == srl){
+    #####:  219:        printf("%d: ",pointer->serial);
+    #####:  220:        printf("%s (Ph: %s ), Illness: %s\n\n",pointer->name,pointer->phone,pointer->illness);
+        -:  221:    }
+        -:  222:    else{
+    #####:  223:        printf("No Record Found!!!\n\n\n");
+        -:  224:    }
+    #####:  225:    printf("\n\n\n\nPress any key to go back to Doctor's menu: ");
+        -:  226:    char key;
+    #####:  227:    getchar();
+    #####:  228:    scanf("%c",&key);
+    #####:  229:    if(key>=0)
+        -:  230:    {   
+    #####:  231:        system("clear");
+    #####:  232:        return;
+        -:  233:    }
+        -:  234:}
+        -:  235:
+        -:  236:
+        -:  237:
+    #####:  238:void Call(node *head)
+        -:  239:{
+    #####:  240:    printf("***********************************************  Calling Portal  ***********************************************\n\n\n");
+        -:  241:    node *temp;
+    #####:  242:    temp=head;
+        -:  243:    char key;
+    #####:  244:    printf("\n\n");
+    #####:  245:    if(temp==NULL)
+        -:  246:    {
+    #####:  247:        printf("No Appointment today!!!\n\n\n");
+    #####:  248:        printf("Press any key to go back to main menu");
+    #####:  249:        scanf("%c",&key);
+    #####:  250:        if(key>=0)
+        -:  251:        {
+    #####:  252:            system("clear");
+    #####:  253:            return;
+        -:  254:        }
+        -:  255:    }
+    #####:  256:    printf("Calling:\n");
+    #####:  257:    printf("Serial %d: %s\nPhone:%s\nIllness:%s\n\n",temp->serial,temp->name,temp->phone,temp->illness);
+    #####:  258:    if(temp->next!=NULL)
+        -:  259:    {
+    #####:  260:        temp=temp->next;
+    #####:  261:        printf("Next is:\n");
+    #####:  262:        printf("Serial %d: %s\nPhone:%s\nIllness:%s\n\n",temp->serial,temp->name,temp->phone,temp->illness);
+        -:  263:    }
+    #####:  264:    printf("\n\nPress any key to go back to Doctor's Menu...");
+    #####:  265:    getchar();
+    #####:  266:    scanf("%c",&key);
+    #####:  267:        if(key>=0)
+        -:  268:        {
+    #####:  269:            node *temp1=head;
+    #####:  270:            head=head->next;
+    #####:  271:            free(temp1);
+    #####:  272:            system("clear");
+    #####:  273:            return;
+        -:  274:        }
+        -:  275:}
+        -:  276:
+        -:  277:
+        -:  278:

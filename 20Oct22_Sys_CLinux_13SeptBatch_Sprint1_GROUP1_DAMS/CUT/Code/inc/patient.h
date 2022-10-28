@@ -20,6 +20,6 @@ void View(node *);
 //for doctor use
 void Showlist(node *);
 void Call(node *);
-
+void Pwrite(node *);
 
 #endif

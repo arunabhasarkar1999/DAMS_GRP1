@@ -124,7 +124,7 @@ void viewRecep(recepnode *receppointer){
         printf("%s (Ph: %s )\n\n",receppointer->name,receppointer->phone);
         receppointer=receppointer->next;
     }
-    printf("\n\n\n\Press any key to go back : ");
+    printf("\n\n\nPress any key to go back : ");
     char key;
     getchar();
     scanf("%c",&key);
@@ -133,3 +133,23 @@ void viewRecep(recepnode *receppointer){
         return;
     }
 }
+
+
+
+void Rwrite(recepnode *receppointer){
+    FILE *rptr = fopen("recep.txt","w");
+        for(receppointer=recephead; receppointer; receppointer=receppointer->next){
+           fprintf(rptr," %d ,%s ,%s \n",receppointer->serial,receppointer->name,receppointer->phone);
+        }
+    fclose(rptr);
+    printf("\n\nData written to the receptionist file Successfully!!!\n\n");
+    printf("\n\nPress any key to go back : ");
+    char key;
+    getchar();
+    scanf("%c",&key);
+    if(key>=0)
+    {   
+        return;
+    }
+}
+    
